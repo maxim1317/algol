@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
         {
             I.push_back(buf);
             if (buf > max) max = buf;
-            printf("| 0 | %d | ? |\n", buf);
+            printf("| %d | %d | ? |\n", k, buf);
             cin>>buf;
             J.push_back(buf);
             if (buf > max) max = buf;
@@ -83,3 +83,5 @@ int main(int argc, char const *argv[])
 
     return 0;
 }
+
+
