@@ -15,6 +15,7 @@ public:
   void GenHl();
   void ReadIJ();
   void PrintIJHL();
+  void PrintVertex();
   Graph(int, vector<int>&, vector<int>&);
   Graph();
   ~Graph(){};  
@@ -104,3 +105,13 @@ void Graph::ReadIJ()
 
 }
 
+void Graph::PrintVertex()
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (H[i] != -1)
+		{
+			
+		} 
+	}
+}
