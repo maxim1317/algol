@@ -10,12 +10,14 @@ public:
 
   int n, m;
   
-  vector<int> I, J, H, L;
+  vector<int> I, J, H, L, IJ;
 
   void GenHl();
   void ReadIJ();
+  void GenIJ();
+  void Export();
   void PrintIJHL();
-  void PrintVertex();
+  void Add(int, int);
   Graph(int, vector<int>&, vector<int>&);
   Graph();
   ~Graph(){};  
@@ -24,40 +26,62 @@ public:
 
 Graph::Graph()
 {
-	ReadIJ();
-	GenHl();
+	//ReadIJ();
+	GenIJ();
 }
 
-Graph::Graph(int _n, vector<int>&_I, vector<int>&_J): n(_n), I(_I), J(_J), m(_I.size())
+Graph::Graph(int _n, vector<int>&_I, vector<int>&_J): n(_n), m(_I.size())
 {
+  IJ.resize(2*m);
+  for (int k(0); k < m; ++k) {
+    IJ[k] = _I[k];
+    int ind = 2*m - k - 1;
+    IJ[ind] = _J[k];
+  }
+  I = _I;
+  J = _J;
 	GenHl();
 }
 
 void Graph::GenHl()
 {
+//	H.clear();
+//	L.clear();
+	//printf("!!!\n");
 	H.assign(n, -1);
-	L.resize(m);
-	for (int i=0; i < m; i++) 
+	L.resize(2*m);
+	for (int k = 0; k < m*2; ++k )
 	{
-        int k = I[i];
-        L[i] = H[k];
-        H[k] = i;
-    }
+		int i = IJ[k];
+		L[k] = H[i];
+		H[i] = k;
+	}
 }
 
 void Graph::PrintIJHL()
 {
-	printf("| # | I | J |  H |  L |\n");
+	cout<<endl;
+	cout<<endl;
+	cout<<endl;
+	printf("|  # | I | J |  H |  L | IJ |\n");
 	int k = 0;
+
+
+	
 	while (k < n)
 	{
-		printf("| %d | %d | %d | %2d | %2d |\n", k, I[k], J[k], H[k], L[k]);
+		printf("| %2d | %d | %d | %2d | %2d | %2d |\n", k, I[k], J[k], H[k], L[k], IJ[k]);
 		k++;
 	}
-	H[k] = -1;
-		while (k < m)
+	
+	while (k < m)
 	{
-		printf("| %d | %d | %d |    | %2d |\n", k, I[k], J[k], L[k]);
+		printf("| %2d | %d | %d |    | %2d | %2d |\n", k, I[k], J[k], L[k], IJ[k]);
+		k++;
+	}
+	while (k < 2*m)
+	{
+		printf("| %2d |   |   |    | %2d | %2d |\n", k, L[k], IJ[k]);
 		k++;
 	}
 }
@@ -104,14 +128,46 @@ void Graph::ReadIJ()
 
 
 }
-
-void Graph::PrintVertex()
+void Graph::Add(int i, int j)
 {
+	I.push_back(i);
+	J.push_back(j);
+	m++;
+	// IJ.clear();
+ //  GenIJ();
+	IJ.insert(IJ.begin() + m - 1, i);
+	IJ.insert(IJ.begin() + m, j);
+	H.clear();
+	L.clear();
+	GenHl();
+}
+
+void Graph::GenIJ()
+{
+	for (int k = m-1; k >=0; k--)
+	{
+		IJ.insert(IJ.begin(),I[k]);
+		IJ.push_back(J[k]);
+	}
+	GenHl();
+}
+
+void Graph::Export()
+{
+	FILE *out;
+	out = fopen("graph.dot", "w");
+	fprintf(out, "graph graphname {\n");
 	for (int i = 0; i < n; i++)
 	{
-		if (H[i] != -1)
-		{
-			
-		} 
+		fprintf(out, "  %d;\n", i);
 	}
+	for (int i = 0; i < m; i++)
+	{
+		// fprintf(out, "  %d -- %d;\n", I[i], J[i]);
+		fprintf(out, "  %d -- %d;\n", IJ[i], IJ[2 * m - i - 1]);
+	}
+	fprintf(out, "}\n" );
+	fclose(out);
+
+
 }
