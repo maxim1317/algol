@@ -9,10 +9,8 @@ class Graph
 public:
 
   int n, m;
-  int color = -1;
   int tmp = 0;   
-  vector<int> I, J, H, L, IJ;
-  vector<vector<int> > numComp;
+  vector<int> I, J, H, L, IJ, numComp, colors;
 
   void GenHl();
   void ReadIJ();
@@ -21,7 +19,7 @@ public:
   void PrintIJHL();
   void Add(int, int);
   void DeleteArc(int, int);
-  void DFS(int);
+  void DFS(int, int);
   void ConnectedComponent();
   Graph(int, vector<int>&, vector<int>&);
   Graph();
@@ -39,9 +37,7 @@ Graph::Graph(int _n, vector<int>&_I, vector<int>&_J): n(_n), m(_I.size())
 {
 	for (int i = 0; i < n; i++)
 	{
-		numComp.push_back(vector<int>());
-		numComp[i].push_back(-1);
-		numComp[i].push_back(0);
+		numComp.push_back(-1);
 	}
   IJ.resize(2*m);
   for (int k(0); k < m; ++k) {
@@ -78,15 +74,21 @@ void Graph::PrintIJHL()
 	printf("|  # | I | J |  H |  L | IJ |\n");
 	int k = 0;
 
+	int _n = n;
+	int _m = m;
 
-	
-	while (k < n)
+	if (m < n)
+	{
+		_n = m;
+		_m = _n;
+	}
+	while (k < _n)
 	{
 		printf("| %2d | %d | %d | %2d | %2d | %2d |\n", k, I[k], J[k], H[k], L[k], IJ[k]);
 		k++;
 	}
 	
-	while (k < m)
+	while (k < _m)
 	{
 		printf("| %2d | %d | %d |    | %2d | %2d |\n", k, I[k], J[k], L[k], IJ[k]);
 		k++;
@@ -171,7 +173,7 @@ void Graph::Export()
 	fprintf(out, "graph graphname {\n");
 	for (int i = 0; i < n; i++)
 	{
-		fprintf(out, "  %d [style=filled, colorscheme=set19, fillcolor = %d];\n", i, numComp[i][0]+1);
+		fprintf(out, "  %d [style=filled, colorscheme=set19, fillcolor = %d];\n", i, numComp[i]+1);
 	}
 	for (int i = 0; i < m; i++)
 	{
@@ -206,14 +208,14 @@ void Graph::DeleteArc(int v, int a)
     }
 }
 
-void Graph::DFS(int v){
-	if(numComp[v][0] == -1){
-		numComp[v][0] = color;
-		numComp[color][1]++;
+void Graph::DFS(int v, int color){
+	if(numComp[v] == -1){
+		numComp[v] = color;
+		colors[color]++;
 
 		for(int i = 0; i < 2*m; i++){
 			if(IJ[i] == v){
-				DFS(IJ[IJ.size() - 1 - i]);
+				DFS(IJ[IJ.size() - 1 - i], color);
 			}
 		}
 	}
@@ -221,16 +223,20 @@ void Graph::DFS(int v){
 }
 
 void Graph::ConnectedComponent(){
-
-	color = 0;
+	colors.push_back(0);
+	int color = 0;
 	for(int i = 0; i < n; i++){
-		DFS(i);
-		if (numComp[color][1] != 0) color++;
+		DFS(i, color);
+		if (colors[color] != 0) 
+		{
+			color++;
+			colors.push_back(0);
+		}
 	}
 
-	printf("\n| Col | Cnt |\n");
+	printf("\n| Col |\n");
 	for (int i = 0; i < n; i++)
 	{
-		printf("| %3d | %3d |\n", numComp[i][0], numComp[i][1]);
+		printf("| %3d |\n", numComp[i]);
 	}
 }
