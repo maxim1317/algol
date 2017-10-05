@@ -39,7 +39,7 @@ void Graph::PrintIJHL()
 void Graph::Export(int fileNumber)
 {
 	FILE *out;
-	string fileName = "graph";
+	string fileName = "tmp/graph";
 	string dot = ".dot";
 	fileName += to_string(fileNumber) + dot;
 	out = fopen(fileName.c_str(), "w");
