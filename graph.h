@@ -9,8 +9,10 @@ class Graph
 public:
 
   int n, m;
-  
-  vector<int> I, J, H, L, IJ, numComp;
+  int color = -1;
+  int tmp = 0;   
+  vector<int> I, J, H, L, IJ;
+  vector<vector<int> > numComp;
 
   void GenHl();
   void ReadIJ();
@@ -19,7 +21,7 @@ public:
   void PrintIJHL();
   void Add(int, int);
   void DeleteArc(int, int);
-  void DFS(int, int);
+  void DFS(int);
   void ConnectedComponent();
   Graph(int, vector<int>&, vector<int>&);
   Graph();
@@ -37,7 +39,9 @@ Graph::Graph(int _n, vector<int>&_I, vector<int>&_J): n(_n), m(_I.size())
 {
 	for (int i = 0; i < n; i++)
 	{
-		numComp.push_back(-1);
+		numComp.push_back(vector<int>());
+		numComp[i].push_back(-1);
+		numComp[i].push_back(0);
 	}
   IJ.resize(2*m);
   for (int k(0); k < m; ++k) {
@@ -167,12 +171,12 @@ void Graph::Export()
 	fprintf(out, "graph graphname {\n");
 	for (int i = 0; i < n; i++)
 	{
-		fprintf(out, "  %d;\n", i);
+		fprintf(out, "  %d [style=filled, colorscheme=set19, fillcolor = %d];\n", i, numComp[i][0]+1);
 	}
 	for (int i = 0; i < m; i++)
 	{
 		// fprintf(out, "  %d -- %d;\n", I[i], J[i]);
-		fprintf(out, "  %d -- %d;\n", IJ[i], IJ[2 * m - i - 1]);
+		fprintf(out, "  %d -- %d ;\n", IJ[i], IJ[2 * m - i - 1]);
 	}
 	fprintf(out, "}\n" );
 	fclose(out);
@@ -202,28 +206,31 @@ void Graph::DeleteArc(int v, int a)
     }
 }
 
-void Graph::DFS(int v, int color){
-	if(numComp[v] == -1){
-		numComp[v] = color;
+void Graph::DFS(int v){
+	if(numComp[v][0] == -1){
+		numComp[v][0] = color;
+		numComp[color][1]++;
 
 		for(int i = 0; i < 2*m; i++){
 			if(IJ[i] == v){
-				printf("%d %d %d\n", v, color, i);
-				DFS(IJ[IJ.size() - 1 - i], color);
+				DFS(IJ[IJ.size() - 1 - i]);
 			}
 		}
 	}
+
 }
 
 void Graph::ConnectedComponent(){
 
+	color = 0;
 	for(int i = 0; i < n; i++){
-		DFS(i, i);
+		DFS(i);
+		if (numComp[color][1] != 0) color++;
 	}
 
-	printf("| Col |\n");
+	printf("\n| Col | Cnt |\n");
 	for (int i = 0; i < n; i++)
 	{
-		printf("| %3d |\n", numComp[i]);
+		printf("| %3d | %3d |\n", numComp[i][0], numComp[i][1]);
 	}
 }
