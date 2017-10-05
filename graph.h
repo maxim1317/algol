@@ -206,9 +206,9 @@ void Graph::DFS(int v, int color){
 	if(numComp[v] == -1){
 		numComp[v] = color;
 
-		for(int i = 0; i < m; i++){
+		for(int i = 0; i < 2*m; i++){
 			if(IJ[i] == v){
-				printf("%d %d %d %d\n", v, color, i);
+				printf("%d %d %d\n", v, color, i);
 				DFS(IJ[IJ.size() - 1 - i], color);
 			}
 		}
