@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
-#include "graph.h"
-
+#include "headers/graph.h"
 
 using namespace std;
 
@@ -16,11 +15,15 @@ int main(int argc, char const *argv[])
 
   Graph a(7, vi, vj);
   a.PrintIJHL();
-  //a.Add(0, 3);
-  a.PrintIJHL();
+
   a.ConnectedComponent();
+  a.Export(1);
   
-  a.Export();
+  a.Add(6, 4);
+  a.PrintIJHL();
+  
+  a.ConnectedComponent();
+  a.Export(2);
 
   return 0;
 }
