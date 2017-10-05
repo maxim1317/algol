@@ -10,7 +10,7 @@ public:
 
   int n, m;
   
-  vector<int> I, J, H, L, IJ;
+  vector<int> I, J, H, L, IJ, numComp;
 
   void GenHl();
   void ReadIJ();
@@ -18,6 +18,9 @@ public:
   void Export();
   void PrintIJHL();
   void Add(int, int);
+  void DeleteArc(int, int);
+  void DFS(int, int);
+  void ConnectedComponent();
   Graph(int, vector<int>&, vector<int>&);
   Graph();
   ~Graph(){};  
@@ -32,6 +35,10 @@ Graph::Graph()
 
 Graph::Graph(int _n, vector<int>&_I, vector<int>&_J): n(_n), m(_I.size())
 {
+	for (int i = 0; i < n; i++)
+	{
+		numComp.push_back(-1);
+	}
   IJ.resize(2*m);
   for (int k(0); k < m; ++k) {
     IJ[k] = _I[k];
@@ -63,6 +70,7 @@ void Graph::PrintIJHL()
 	cout<<endl;
 	cout<<endl;
 	cout<<endl;
+	printf("n = %d\n", n);
 	printf("|  # | I | J |  H |  L | IJ |\n");
 	int k = 0;
 
@@ -170,4 +178,52 @@ void Graph::Export()
 	fclose(out);
 
 
+}
+
+void Graph::DeleteArc(int v, int a)
+{
+    if(H[v] == a)
+    {
+        int temp = H[v];
+        H[v] = L[H[v]];
+        L[temp] = -1;
+    }
+    else
+    {
+        for (int k = H[v]; k !=-1; k = L[k])
+        {
+            if (L[k] == a)
+            {
+                int temp = L[k];
+                L[k] = L[L[k]];
+                L[temp] = -1;
+            }
+        }
+    }
+}
+
+void Graph::DFS(int v, int color){
+	if(numComp[v] == -1){
+		numComp[v] = color;
+
+		for(int i = 0; i < m; i++){
+			if(IJ[i] == v){
+				printf("%d %d %d %d\n", v, color, i);
+				DFS(IJ[IJ.size() - 1 - i], color);
+			}
+		}
+	}
+}
+
+void Graph::ConnectedComponent(){
+
+	for(int i = 0; i < n; i++){
+		DFS(i, i);
+	}
+
+	printf("| Col |\n");
+	for (int i = 0; i < n; i++)
+	{
+		printf("| %3d |\n", numComp[i]);
+	}
 }
