@@ -32,6 +32,10 @@ public:
   
 };
 
+#include "colors.hpp"
+
+const char* conColor (int);
+
 #include "graph_main.hpp"
 #include "graph_dfs.hpp"
 #include "graph_prints.hpp"
