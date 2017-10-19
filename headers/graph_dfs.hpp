@@ -21,11 +21,7 @@ void Graph::ConnectedComponent(){
         }
     }
 
-    printf("\n|Col|\n");
-    for (int i = 0; i < n; i++)
-    {
-        printf("| %1d |\n", numComp[i]);
-    }
+    PrintColors();
 
     colors.clear();
 }

@@ -14,16 +14,26 @@ int main(int argc, char const *argv[])
   vector<int> vj = {1, 2, 2, 6};
 
   Graph a(7, vi, vj);
-  a.PrintIJHL();
+  printf("\n");
+
+
+  // a.PrintIJHL();
 
   a.ConnectedComponent();
   a.Export(1);
   
   a.Add(6, 4);
-  a.PrintIJHL();
+  // a.PrintIJHL();
   
   a.ConnectedComponent();
   a.Export(2);
+
+  a.Add(1,6);
+  a.PrintIJHL();
+
+  a.ConnectedComponent();
+  a.BFS(2);
+  a.Export(3, 1);
 
   return 0;
 }

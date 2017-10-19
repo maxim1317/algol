@@ -7,24 +7,25 @@ using namespace std;
 
 Graph::Graph()
 {
-	//ReadIJ();
+	ReadIJ();
 	GenIJ();
 }
 
 Graph::Graph(int _n, vector<int>&_I, vector<int>&_J): n(_n), m(_I.size())
 {
+    version = 1;
 	for (int i = 0; i < n; i++)
 	{
 		numComp.push_back(-1);
 	}
-  IJ.resize(2*m);
-  for (int k(0); k < m; ++k) {
-    IJ[k] = _I[k];
-    int ind = 2*m - k - 1;
-    IJ[ind] = _J[k];
-  }
-  I = _I;
-  J = _J;
+    IJ.resize(2*m);
+    for (int k(0); k < m; ++k) {
+        IJ[k] = _I[k];
+        int ind = 2*m - k - 1;
+        IJ[ind] = _J[k];
+    }
+    I = _I;
+    J = _J;
 	GenHl();
 }
 
@@ -88,11 +89,12 @@ void Graph::ReadIJ()
 }
 void Graph::Add(int i, int j)
 {
+    version++;
 	I.push_back(i);
 	J.push_back(j);
 	m++;
 	// IJ.clear();
- //  GenIJ();
+    //  GenIJ();
 	IJ.insert(IJ.begin() + m - 1, i);
 	IJ.insert(IJ.begin() + m, j);
 	H.clear();
