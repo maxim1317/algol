@@ -90,9 +90,9 @@ void Graph::Export(int option = 0)
 		fprintf(out, "  %d [style=filled, colorscheme=set19, fillcolor = %d];\n", i, numComp[i]+1);
         if (option)
         {
-            fprintf(out, " %d--%d  [style=dotted, arrowhead=odot, arrowsize=1] ;\n", i, i+n+1);
-            fprintf(out, " %d [shape=plaintext,label=\"%d\"]", i+n+1, distance[i]);
-            fprintf(out, " {rank=same; %d;%d}\n", i, i+n+1);
+            fprintf(out, "    %d--%d  [style=dotted, arrowhead=odot, arrowsize=1] ;\n", i, i+n+1);
+            fprintf(out, "    %d [shape=plaintext,label=\"%d\"]", i+n+1, distance[i]);
+            fprintf(out, "    {rank=same; %d;%d}\n\n", i, i+n+1);
 
 //             b->iuc [style=dotted, arrowhead=odot, arrowsize=1] ;
 // iuc [shape=plaintext,label="This is a test of a long\n comment and how dot is showing\n it"];
