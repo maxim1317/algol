@@ -1,19 +1,24 @@
-all: png
-	@ristretto tmp/graph1.png &
-	@ristretto tmp/graph2.png &
-	@ristretto tmp/graph3.png &
+TMP=tmp
+DOTS=tmp/dots
+
+all: paint
+
+paint: png
+	@scripts/viewpng.sh
 png: compile
-	@dot -Tpng tmp/dots/graph1.dot -o tmp/graph1.png
-	@dot -Tpng tmp/dots/graph2.dot -o tmp/graph2.png
-	@dot -Tpng tmp/dots/graph3.dot -o tmp/graph3.png
+	@scripts/dot2png.sh
 compile:
-	@mkdir -p tmp
-	@mkdir -p tmp/dots
+	@mkdir -m 777 -p $(TMP)
+	@mkdir -m 777 -p $(DOTS)
 	@clang++ --std=c++11 graph.cpp -o graph
 	@./graph
 
 .PHONY: clean
 clean: 
-	@rm -rf tmp/
+	@rm -rf $(TMP)
 	@rm -f graph 
 	@pkill -f ristretto
+
+.PHONY: watch
+watch:
+	mplayer -mf fps=1:type=png mf://tmp/*.png
