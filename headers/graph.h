@@ -44,7 +44,7 @@ public:
     void BFS(int);
 
 // In /headers/graph_prints.hpp:
-    void Export(int, int);
+    void Export(int);
     void PrintIJHL();
     
 };

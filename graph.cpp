@@ -20,20 +20,20 @@ int main(int argc, char const *argv[])
   // a.PrintIJHL();
 
   a.ConnectedComponent();
-  a.Export(1);
+  a.Export();
   
   a.Add(6, 4);
   // a.PrintIJHL();
   
   a.ConnectedComponent();
-  a.Export(2);
+  a.Export();
 
   a.Add(1,6);
   a.PrintIJHL();
 
   a.ConnectedComponent();
   a.BFS(2);
-  a.Export(3, 1);
+  a.Export(1);
 
   return 0;
 }

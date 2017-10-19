@@ -77,12 +77,12 @@ void Graph::PrintColors()
     }
 }
 
-void Graph::Export(int fileNumber, int option = 0)
+void Graph::Export(int option = 0)
 {
 	FILE *out;
 	string fileName = "tmp/dots/graph";
 	string dot = ".dot";
-	fileName += to_string(fileNumber) + dot;
+	fileName += to_string(version) + dot;
 	out = fopen(fileName.c_str(), "w");
 	fprintf(out, "graph graphname {\n");
 	for (int i = 0; i < n; i++)
