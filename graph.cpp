@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 
   //Graph a;
   //a.ReadIJ();
-  vector<int> vi = {0, 3, 4, 5};
+  vector<int> vi = {0, 0, 3, 4};
   vector<int> vj = {1, 2, 2, 6};
   std::vector<int> vh;
 
@@ -51,21 +51,19 @@ int main(int argc, char const *argv[])
   vi = {0, 0, 1, 1, 1, 3, 3, 4};
   vj = {1, 2, 2, 3, 4, 2, 1, 3};
   vh = {1, 4, 3, 2, 2, 5, 1, 3};
-  // a.weight.clear();
-  // a.weight = {1, 2, 3, 4, 5, 6};
-  // a.version++;
 
   Graph b{5, vi, vj, vh};
   b.prefix = "B";
 
-  // b.ConnectedComponent();
-  // b.Belford(0);
-  // b.Export(1);
-  b.version++;
   b.PrintIJHL();
   b.ConnectedComponent();
-  b.Dijkstra(0);
+  b.Belford(0);
   b.Export(1);
+  // b.version++;
+  // b.PrintIJHL();
+  // b.ConnectedComponent();
+  // b.Dijkstra(0);
+  // b.Export(1);
 
 
   return 0;

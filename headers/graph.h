@@ -28,6 +28,9 @@ private:
     int MinEdge(bool*);
     int GetWeight(int, int);
 
+// In /headers/graph_prints.hpp:
+    const char* getw(int);
+
 public:
 
     int n, m, version;
