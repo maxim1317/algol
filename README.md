@@ -37,8 +37,8 @@
 
 ### /
 
-- [graph.cpp]() - main()
-- [Makefile]() - собственно, make файл
+- [graph.cpp](https://github.com/maxim1317/algol/blob/master/graph.cpp) - main()
+- [Makefile](https://github.com/maxim1317/algol/blob/master/Makefile) - собственно, make файл
 
 ### /headers/ 
 
