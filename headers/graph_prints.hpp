@@ -7,14 +7,15 @@ using namespace std;
 void Graph::PrintIJHL()
 {
 	printf("\n");
-
-	printf("%s", conColor(50));
-  	printf("__________VERSION_%d__________\n", version);
+    const char* s1 = conColor(50);
+	printf("%s", s1);
+  	printf("_________VERSION_%s-%d_________\n", prefix, version);
   	printf("%s", conColor(0));
 	printf("%s", conColor(160));
 	printf("|  # | I | J |  H |  L | IJ |\n");
 	printf("%s", conColor(0));
 	int k = 0;
+    int n = this->n;
 
 	if (m < n)
     {
@@ -88,7 +89,7 @@ void Graph::Export(int option = 0)
 	for (int i = 0; i < n; i++)
 	{
 		fprintf(out, "  %d [style=filled, colorscheme=set19, fillcolor = %d];\n", i, numComp[i]+1);
-        if (option)
+        if (option == 1)
         {
             fprintf(out, "    %d--%d  [style=dotted, arrowhead=odot, arrowsize=1] ;\n", i, i+n+1);
             fprintf(out, "    %d [shape=plaintext,label=\"%d\"]", i+n+1, distance[i]);
@@ -102,7 +103,15 @@ void Graph::Export(int option = 0)
 	for (int i = 0; i < m; i++)
 	{
 		// fprintf(out, "  %d -- %d;\n", I[i], J[i]);
-		fprintf(out, "  %d -- %d ;\n", IJ[i], IJ[2 * m - i - 1]);
+        if (weight[i] != INT_MAX)
+        {
+            fprintf(out, "  %d -- %d [label = %d];\n", IJ[i], IJ[2 * m - i - 1], weight[i]);
+        }
+        else
+        {
+            fprintf(out, "  %d -- %d ;\n", IJ[i], IJ[2 * m - i - 1]);
+        }
+
 	}
 	fprintf(out, "}\n" );
 	fclose(out);

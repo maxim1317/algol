@@ -19,7 +19,21 @@ clean:
 	@rm -f graph 
 	@pkill -f ristretto
 
+.PHONY: val
+val:
+	@mkdir -p $(TMP)
+	@mkdir -p $(DOTS)
+	@clang++ --std=c++11 graph.cpp -o graph
+	@valgrind -v ./graph -v
+
 .PHONY: watch
 watch:
 	mplayer -mf fps=1:type=png mf://tmp/*.png
 #Попытка сделалать слайдшоу из картинок
+
+.PHONY: gt
+gt:
+	@rm -rf $(TMP)
+	@rm -f graph 
+	@pkill -f ristretto
+	@git add *
