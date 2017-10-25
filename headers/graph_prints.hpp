@@ -9,7 +9,7 @@ void Graph::PrintIJHL()
 	printf("\n");
     const char* s1 = conColor(50);
 	printf("%s", s1);
-  	printf("_________VERSION_%s-%d_________\n", prefix, version);
+  	printf("_________VERSION_%s-%d_________\n", prefix.c_str(), version);
   	printf("%s", conColor(0));
 	printf("%s", conColor(160));
 	printf("|  # | I | J |  H |  L | IJ |\n");
@@ -66,6 +66,10 @@ void Graph::PrintColors()
 	printf("%s",conColor(160));
     printf("\n|Col %d|", version);
     printf("%s\n",conColor(0));
+
+    printf("%s",conColor(160));
+    printf("|  %1s  |", prefix.c_str());
+    printf("%s\n",conColor(0));
     for (int i = 0; i < n; i++)
     {
     	printf("%s", conColor(160));
@@ -83,7 +87,7 @@ void Graph::Export(int option = 0)
 	FILE *out;
 	string fileName = "tmp/dots/graph";
 	string dot = ".dot";
-	fileName += to_string(version) + dot;
+	fileName += "_" + prefix + "-" + to_string(version) + dot;
 	out = fopen(fileName.c_str(), "w");
 	fprintf(out, "graph graphname {\n");
 	for (int i = 0; i < n; i++)

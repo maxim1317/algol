@@ -7,7 +7,7 @@ paint: png
 	@scripts/viewpng.sh
 png: compile
 	@scripts/dot2png.sh
-compile:
+compile: clean
 	@mkdir -p $(TMP)
 	@mkdir -p $(DOTS)
 	@clang++ --std=c++11 graph.cpp -o graph
@@ -16,8 +16,10 @@ compile:
 .PHONY: clean
 clean: 
 	@rm -rf $(TMP)
-	@rm -f graph 
+	@rm -f graph
+	@ristretto&
 	@pkill -f ristretto
+	@git reset
 
 .PHONY: val
 val:
@@ -32,8 +34,5 @@ watch:
 #Попытка сделалать слайдшоу из картинок
 
 .PHONY: gt
-gt:
-	@rm -rf $(TMP)
-	@rm -f graph 
-	@pkill -f ristretto
+gt: clean
 	@git add *

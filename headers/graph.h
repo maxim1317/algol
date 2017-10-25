@@ -29,7 +29,7 @@ public:
 
     int n, m, version;
     int tmp = 0;
-    char* prefix = ""; 
+    std::string prefix = ""; 
 
     std::vector<int> I, J, H, L, IJ;
     std::vector<int> weight, numComp, colors;
