@@ -33,6 +33,11 @@ void Graph::BFS(int start)
 
         }
     }
+    for (int i = 0; i < n; i++)
+    {
+        if (i != start && distance[i])
+            distance[i] = MAX_INT;
+    }
 }
 
 std::vector<int> Graph::GetNeighbours(int vertex)
