@@ -8,7 +8,7 @@ void Graph::BFS(int start)
     std::vector<int> neighbours;
     for (int i = 0; i < n; i++)
     {
-        distance.push_back(MAX_INT);
+        distance.push_back(0);
         mark.push_back(0);
     }
 
@@ -35,7 +35,7 @@ void Graph::BFS(int start)
     }
     for (int i = 0; i < n; i++)
     {
-        if (i != start && distance[i])
+        if (i != start && distance[i] == 0)
             distance[i] = MAX_INT;
     }
 }
