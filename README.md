@@ -8,7 +8,7 @@
 - [Список пучков дуг](https://github.com/maxim1317/algol/blob/master/headers/graph_main.hpp)
 - [Поиск в глубину](https://github.com/maxim1317/algol/blob/master/headers/graph_dfs.hpp)
 - [Поиск в ширину](https://github.com/maxim1317/algol/blob/master/headers/graph_bfs.hpp)
-- [Алгоритм Беллмана-Форда]()
+- [Алгоритм Беллмана-Форда](https://github.com/maxim1317/algol/blob/master/headers/graph_belford.hpp)
 - [Алгоритм Дейкстры]()
 
 ## Вывод
