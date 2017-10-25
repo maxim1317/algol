@@ -24,6 +24,9 @@ private:
 // In /headers/graph_bfs.hpp:
     std::vector<int> GetNeighbours(int);
 
+// In /headers/graph_dijkstra.hpp:
+    int MinEdge(bool*);
+    int GetWeight(int, int);
 
 public:
 
@@ -51,8 +54,11 @@ public:
 // In /headers/graph_bfs.hpp:
     void BFS(int);
 
-// In /headers/graph_bfs.hpp:
+// In /headers/graph_belford.hpp:
     void Belford(int);
+
+// In /headers/graph_dijkstra.hpp:
+    void Dijkstra(int);
 
 // In /headers/graph_prints.hpp:
     void Export(int);
@@ -79,6 +85,7 @@ std::vector<int> pop(std::vector<int> &vec)
 #include "graph_dfs.hpp"
 #include "graph_bfs.hpp"
 #include "graph_belford.hpp"
+#include "graph_dijkstra.hpp"
 #include "graph_prints.hpp"
 
 

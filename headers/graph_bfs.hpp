@@ -36,7 +36,7 @@ void Graph::BFS(int start)
     for (int i = 0; i < n; i++)
     {
         if (i != start && distance[i] == 0)
-            distance[i] = MAX_INT;
+            distance[i] = INT_MAX;
     }
 }
 
