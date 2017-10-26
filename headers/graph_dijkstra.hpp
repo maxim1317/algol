@@ -30,10 +30,10 @@ int Graph::GetWeight(int from, int to)
 {
     for (int i = 0; i < m; ++i)
     {
-        if ((I[i] == from && J[i] == to) || (J[i] == from && I[i] == to))
+        if ((I[i] == from && J[i] == to) || ((J[i] == from && I[i] == to) && mode != 2))
             return weight[i];
     }
-    return INT_MAX;
+    return 0;
 }
 
 // void Graph::Dijkstra(int start)
@@ -65,6 +65,8 @@ void Graph::Dijkstra(int start)
 {
     algorithm = "Dijkstra";
 
+    process.clear();
+
     std::vector<int> q, neighbours;
 
     distance.clear();
@@ -77,6 +79,7 @@ void Graph::Dijkstra(int start)
     while (q.size() != 0)
     {
         int v = q[0];
+        process.push_back(v);
         q = pop(q);
 
         neighbours = this->GetNeighbours(v);

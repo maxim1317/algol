@@ -13,10 +13,10 @@ int main(int argc, char const *argv[])
 
   //Graph a;
   //a.ReadIJ();
-  vector<int> vi = {0, 0, 3, 4};
-  vector<int> vj = {1, 2, 2, 6};
+  vector<int> vi = {0, 0, 2, 4};
+  vector<int> vj = {1, 2, 3, 6};
   std::vector<int> vh;
-
+  mode = 2;
   Graph a(7, vi, vj);
   printf("\n");
 
@@ -26,31 +26,30 @@ int main(int argc, char const *argv[])
       val = 1;
     }
 
+
+
+  a.prefix = "A";
   // a.PrintIJHL();
-
-  // a.prefix = "A";
-
+  a.ConnectedComponent();
+  a.Export();
+  
+  a.Add(6, 4);
+  // a.PrintIJHL();
+  
   // a.ConnectedComponent();
   // a.Export();
-  
-  // a.Add(6, 4);
-  // // a.PrintIJHL();
-  
-  // a.ConnectedComponent();
-  // a.Export();
 
-  // a.Add(1,6);
-  // a.PrintIJHL();
+  a.Add(1,6);
 
-  // a.ConnectedComponent();
-  // a.BFS(2);
-  // a.Export(1);
+  a.ConnectedComponent();
+  a.BFS(0);
+  a.Export(1);
 
   vi.clear();
   vj.clear();
-  vi = {0, 0, 1, 1, 1, 3, 2, 4};
-  vj = {1, 2, 2, 3, 4, 2, 4, 3};
-  vh = {1, 4, 3, 2, 2, 5, 1, 3};
+  vi = {0, 0, 1, 1, 1, 3, 2, 4, 3};
+  vj = {1, 2, 2, 3, 4, 2, 4, 3, 0};
+  vh = {1, 4, 3, 2, 2, 5, 1, 3, 3};
 
   Graph b{5, vi, vj, vh};
   b.prefix = "B";

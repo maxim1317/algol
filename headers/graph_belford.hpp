@@ -47,6 +47,8 @@ void Graph::Belford(int start)
 {
     algorithm = "Bellman_Ford";
 
+    process.clear();
+
     std::vector<int> q, neighbours;
 
     distance.clear();
@@ -59,6 +61,7 @@ void Graph::Belford(int start)
     while (q.size() != 0)
     {
         int v = q[0];
+        process.push_back(v);
         q = pop(q);
 
         neighbours = this->GetNeighbours(v);

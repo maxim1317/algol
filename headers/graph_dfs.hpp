@@ -32,9 +32,9 @@ void Graph::DFS(int v, int color){
         numComp[v] = color;
         colors[color]++;
 
-        for(int i = 0; i < 2*m; i++){
+        for(int i = 0; i < 2*m/mode; i++){
             if(IJ[i] == v){
-                DFS(IJ[IJ.size() - 1 - i], color);
+                DFS(IJ[2*m - 1 - i], color);
             }
         }
     }

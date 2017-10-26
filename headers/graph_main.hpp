@@ -55,8 +55,8 @@ void Graph::GenHl()
 //	L.clear();
 	//printf("!!!\n");
 	H.assign(n, -1);
-	L.resize(2*m);
-	for (int k = 0; k < m*2; ++k )
+	L.resize(2*m/mode);
+	for (int k = 0; k < m*2/mode; ++k )
 	{
 		int i = IJ[k];
 		L[k] = H[i];

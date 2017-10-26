@@ -9,12 +9,13 @@
 #include <climits>
 
 int val = 0;
+int mode = 2;
 
 class Graph
 {
 private:
-std::vector<int> pop(std::vector<int> &);
-std::vector<int> del(std::vector<int> &, int);
+    std::vector<int> pop(std::vector<int> &);
+    std::vector<int> del(std::vector<int> &, int);
 
 // In /headers/graph_main.hpp:
     void GenIJ();
@@ -41,12 +42,14 @@ public:
 
     int n, m, version;
     int tmp = 0;
+    // int mode = 1;
     std::string prefix = ""; 
     std::string algorithm = "";
 
     std::vector<int> I, J, H, L, IJ;
     std::vector<int> weight, numComp, colors;
     std::vector<int> queue, distance, mark;
+    std::vector<int> process;
 
 // In /headers/graph_main.hpp:
     void ReadIJ();
