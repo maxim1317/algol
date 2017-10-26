@@ -5,6 +5,9 @@
 void Graph::BFS(int start)
 {
     algorithm = "BFS";
+
+    process.clear();
+
     std::vector<int> q;
     std::vector<int> neighbours;
     for (int i = 0; i < n; i++)
@@ -19,7 +22,9 @@ void Graph::BFS(int start)
     while (q.size() != 0)
     {
         int v = q[0];
+        process.push_back(v);
         q=pop(q);
+        
         neighbours = this->GetNeighbours(v);
         for (int i = 0; i < neighbours.size(); ++i)
         {
