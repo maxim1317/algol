@@ -19,7 +19,6 @@ clean:
 	@rm -f graph
 	@ristretto&
 	@pkill -f ristretto
-	@git reset
 
 .PHONY: val
 val:
@@ -35,4 +34,5 @@ watch:
 
 .PHONY: gt
 gt: clean
+	@git reset
 	@git add *

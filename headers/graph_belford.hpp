@@ -45,6 +45,7 @@ std::vector<int> Graph::priority(std::vector<int> &q)
 
 void Graph::Belford(int start)
 {
+    algorithm = "Bellman_Ford";
 
     std::vector<int> q, neighbours;
 

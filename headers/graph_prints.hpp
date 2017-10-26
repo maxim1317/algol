@@ -9,11 +9,11 @@ void Graph::PrintIJHL()
 	printf("\n");
     const char* s1 = conColor(50);
 	printf("%s", s1);
-  	printf("____________VERSION_%s-%d____________\n", prefix.c_str(), version);
-  	printf("%s", conColor(0));
+  	printf("____________VERSION_%s-%d____________", prefix.c_str(), version);
+  	printf("%s\n", conColor(0));
 	printf("%s", conColor(160));
-	printf("|  # | I | J |  H |  L | IJ |  W  |\n");
-	printf("%s", conColor(0));
+	printf("|  # | I | J |  H |  L | IJ |  W  |");
+	printf("%s\n", conColor(0));
 	int k = 0;
     int n = this->n;
 
@@ -22,16 +22,16 @@ void Graph::PrintIJHL()
         while (k < m)
         {
             printf("%s", conColor(50+10*(k%2)));
-            printf("| %2d | %d | %d | %2d | %2d | %2d | %3s |\n", k, I[k], J[k], H[k], L[k], IJ[k], getw(k));
-            printf("%s", conColor(0));
+            printf("| %2d | %d | %d | %2d | %2d | %2d | %3s |", k, I[k], J[k], H[k], L[k], IJ[k], getw(k));
+            printf("%s\n", conColor(0));
             k++;
         }
         
         while (k < n)
         {
             printf("%s", conColor(50+10*(k%2)));
-            printf("| %2d |   |   | %2d | %2d | %2d |     |\n", k, H[k], L[k], IJ[k]);
-            printf("%s", conColor(0));
+            printf("| %2d |   |   | %2d | %2d | %2d |     |", k, H[k], L[k], IJ[k]);
+            printf("%s\n", conColor(0));
             k++;
         }
     }
@@ -39,32 +39,32 @@ void Graph::PrintIJHL()
     	while (k < n)
     	{
     		printf("%s", conColor(50+10*(k%2)));
-    		printf("| %2d | %d | %d | %2d | %2d | %2d | %3s |\n", k, I[k], J[k], H[k], L[k], IJ[k], getw(k));
-    		printf("%s", conColor(0));
+    		printf("| %2d | %d | %d | %2d | %2d | %2d | %3s |", k, I[k], J[k], H[k], L[k], IJ[k], getw(k));
+    		printf("%s\n", conColor(0));
     		k++;
     	}
     	
     	while (k < m)
     	{
     		printf("%s", conColor(50+10*(k%2)));
-    		printf("| %2d | %d | %d |    | %2d | %2d | %3s |\n", k, I[k], J[k], L[k], IJ[k], getw(k));
-    		printf("%s", conColor(0));
+    		printf("| %2d | %d | %d |    | %2d | %2d | %3s |", k, I[k], J[k], L[k], IJ[k], getw(k));
+    		printf("%s\n", conColor(0));
     		k++;
     	}
     }
 	while (k < 2*m)
 	{
 		printf("%s", conColor(50+10*(k%2)));
-		printf("| %2d |   |   |    | %2d | %2d |     |\n", k, L[k], IJ[k]);
-		printf("%s", conColor(0));
+		printf("| %2d |   |   |    | %2d | %2d |     |", k, L[k], IJ[k]);
+		printf("%s\n", conColor(0));
 		k++;
 	}
 }
 
 void Graph::PrintColors()
 {
-	printf("%s",conColor(160));
-    printf("\n|Col %d|", version);
+	printf("\n%s",conColor(160));
+    printf("|Col %d|", version);
     printf("%s\n",conColor(0));
 
     printf("%s",conColor(160));
@@ -77,8 +77,8 @@ void Graph::PrintColors()
     	printf("%s", conColor(110+numComp[i]*10));
         printf("%1d", numComp[i]);
         printf("%s", conColor(160));
-    	cout<<"__|\n";
-    	printf("%s", conColor(0));
+    	cout<<"__|";
+    	printf("%s\n", conColor(0));
     }
 }
 
@@ -87,7 +87,7 @@ void Graph::Export(int option = 0)
 	FILE *out;
 	string fileName = "tmp/dots/graph";
 	string dot = ".dot";
-	fileName += "_" + prefix + "-" + to_string(version) + dot;
+	fileName += "_" + prefix + "-" + to_string(version) + "_" + algorithm + dot;
 	out = fopen(fileName.c_str(), "w");
 	fprintf(out, "graph graphname {\n");
 	for (int i = 0; i < n; i++)

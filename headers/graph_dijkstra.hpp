@@ -2,19 +2,6 @@
 #define __GRAPH_DIJKSTRA_HPP__
 #endif
 
-// int Graph::MinEdge(bool sptSet[])
-// {
-//     int min = INT_MAX, min_index;
-
-//     for (int v = 0; v < n; v++)
-//     if (sptSet[v] == false && distance[v] <= min)
-//     {
-//         min = distance[v];
-//         min_index = v;
-//     }
-//     return min_index;
-// }
-
 // int Graph::GetWeight(int from, int to)
 // {
 //     int k = H[from];
@@ -46,7 +33,7 @@ int Graph::GetWeight(int from, int to)
         if ((I[i] == from && J[i] == to) || (J[i] == from && I[i] == to))
             return weight[i];
     }
-
+    return INT_MAX;
 }
 
 // void Graph::Dijkstra(int start)
@@ -76,6 +63,7 @@ int Graph::GetWeight(int from, int to)
 
 void Graph::Dijkstra(int start)
 {
+    algorithm = "Dijkstra";
 
     std::vector<int> q, neighbours;
 
@@ -88,13 +76,10 @@ void Graph::Dijkstra(int start)
     q.push_back(start);
     while (q.size() != 0)
     {
-        printf("!\n");
         int v = q[0];
         q = pop(q);
 
         neighbours = this->GetNeighbours(v);
-        printf("v = %d\n", v);
-
 
         std::vector<int> u;
         for (int i = 0; i < neighbours.size(); ++i)
@@ -102,33 +87,19 @@ void Graph::Dijkstra(int start)
             u.push_back(MinEdge(v, neighbours));
             neighbours = del(neighbours, u[i]);
         }
+        u.push_back(MinEdge(v, neighbours));
         neighbours = u;
-        printf("neighbours = ");
-        for (int i = 0; i < neighbours.size(); ++i)
-        {
-            printf("%d, ", neighbours[i]);
-        }
-        printf("\n");
 
         for (int i = 0; i < neighbours.size(); i++)
         {
-            printf("v=%d, i= %d:%d + %d < %d\n", i, v, distance[v], GetWeight(v, neighbours[i]), distance[neighbours[i]]);
             if ((distance[neighbours[i]] == INT_MAX) || (distance[v] + GetWeight(v, neighbours[i]) < distance[neighbours[i]]))
             {
-                printf("!!!\n");
                 distance[neighbours[i]] = distance[v] + GetWeight(v, neighbours[i]);
                 mark[neighbours[i]] = 1;
                 q.push_back(neighbours[i]);
                 q = priority(q);
             }
         }
-
-        printf("q = ");
-        for (int i = 0; i < q.size(); ++i)
-        {
-            printf("%d, ", q[i]);
-        }
-        printf("\n");
     }
 
 }
@@ -141,34 +112,13 @@ int Graph::MinEdge(int v, std::vector<int> &nlist)
     for (int i = 0; i < nlist.size(); ++i)
     {
         u = GetWeight(v, nlist[i]);
-        printf("GetWeight(%d, %d) = %d\n", v, nlist[i], u);
         if (u < min)
         {
             min = u;
             min_index = nlist[i];
         }
     }
-    printf("min_index = %d\n", min_index);
     return min_index;
 
 }
 
-
-// std::vector<int> Graph::pushmin(std::vector<int> &q, int from, int to)
-// {
-//     std::vector<int> res;
-//     int w = GetWeight(from, to);
-//     for (int i = 0; i < q.size(); ++i)
-//     {
-//         if (w < GetWeight(from, q[i])
-//         {
-//             q.insert(q.begin() + i, to);
-//             res = q;            
-//             return res;
-//         }
-//     }
-
-//     q.push_back(to);
-//     res = q;
-//     return res;
-// }

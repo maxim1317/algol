@@ -4,6 +4,7 @@
 
 void Graph::BFS(int start)
 {
+    algorithm = "BFS";
     std::vector<int> q;
     std::vector<int> neighbours;
     for (int i = 0; i < n; i++)

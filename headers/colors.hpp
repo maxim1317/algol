@@ -65,7 +65,7 @@ const char* conColor (int code)
         std::string res;
         if (code == 0)
         {   
-            res = "\033[0m";
+            res = "\e[39;49m";
             return res.c_str();
         }
         res = "\033[";
@@ -74,7 +74,7 @@ const char* conColor (int code)
         int bg = code % 10;
         res += std::to_string(bold) + ";";
         res += std::to_string(fg+30) + ";";
-        res += std::to_string(bg+40) + "m";
+        res += std::to_string(49) + "m";
 
         return res.c_str();
     }

@@ -55,11 +55,11 @@ int main(int argc, char const *argv[])
   Graph b{5, vi, vj, vh};
   b.prefix = "B";
 
-  // b.PrintIJHL();
-  // b.ConnectedComponent();
-  // b.Belford(0);
-  // b.Export(1);
-  // b.version++;
+  b.PrintIJHL();
+  b.ConnectedComponent();
+  b.Belford(4);
+  b.Export(1);
+  b.version++;
   b.PrintIJHL();
   b.ConnectedComponent();
   b.Dijkstra(4);

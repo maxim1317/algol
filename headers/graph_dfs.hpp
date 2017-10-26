@@ -6,6 +6,7 @@ using namespace std;
 
 
 void Graph::ConnectedComponent(){
+    algorithm = "DFS";
     colors.push_back(0);
     int color = 0;
     for (int i = 0; i < numComp.size(); i++)

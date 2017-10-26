@@ -42,6 +42,7 @@ public:
     int n, m, version;
     int tmp = 0;
     std::string prefix = ""; 
+    std::string algorithm = "";
 
     std::vector<int> I, J, H, L, IJ;
     std::vector<int> weight, numComp, colors;
