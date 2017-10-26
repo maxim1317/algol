@@ -135,11 +135,14 @@ void Graph::Export(int option = 0)
     {
         for (int i = 0; i < process.size(); ++i)
         {
-            fprintf(out, "  %d [style=filled, colorscheme=set19, fillcolor = 3, label=\"%d\"];\n", process[i] + 3*n, process[i]);
+            fprintf(out, "  %d [style=filled, colorscheme=set19, fillcolor = 3, label=\"%d\"];\n", i + 3*n, process[i]);
         }
         for (int i = 0; i < process.size() - 1; ++i)
         {
-            fprintf(out, "  %d -> %d;\n", process[i] + 3*n, process[i+1] + 3*n);
+            if (mode != 2)
+                fprintf(out, "  %d -- %d [dir=forward];\n", i + 3*n, i + 1 + 3*n);
+            else
+                fprintf(out, "  %d -> %d;\n", i + 3*n, i + 1 + 3*n);
         }
     }
 
