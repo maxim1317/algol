@@ -48,22 +48,22 @@ int main(int argc, char const *argv[])
 
   vi.clear();
   vj.clear();
-  vi = {0, 0, 1, 1, 1, 3, 3, 4};
-  vj = {1, 2, 2, 3, 4, 2, 1, 3};
+  vi = {0, 0, 1, 1, 1, 3, 2, 4};
+  vj = {1, 2, 2, 3, 4, 2, 4, 3};
   vh = {1, 4, 3, 2, 2, 5, 1, 3};
 
   Graph b{5, vi, vj, vh};
   b.prefix = "B";
 
-  b.PrintIJHL();
-  b.ConnectedComponent();
-  b.Belford(0);
-  b.Export(1);
-  // b.version++;
   // b.PrintIJHL();
   // b.ConnectedComponent();
-  // b.Dijkstra(0);
+  // b.Belford(0);
   // b.Export(1);
+  // b.version++;
+  b.PrintIJHL();
+  b.ConnectedComponent();
+  b.Dijkstra(4);
+  b.Export(1);
 
 
   return 0;

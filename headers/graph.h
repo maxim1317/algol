@@ -14,6 +14,7 @@ class Graph
 {
 private:
 std::vector<int> pop(std::vector<int> &);
+std::vector<int> del(std::vector<int> &, int);
 
 // In /headers/graph_main.hpp:
     void GenIJ();
@@ -30,7 +31,7 @@ std::vector<int> pop(std::vector<int> &);
     std::vector<int> priority(std::vector<int> &);
 
 // In /headers/graph_dijkstra.hpp:
-    int MinEdge(bool*);
+    int MinEdge(int, std::vector<int> &);
     int GetWeight(int, int);
 
 // In /headers/graph_prints.hpp:
@@ -88,6 +89,18 @@ std::vector<int> Graph::pop(std::vector<int> &vec)
     
     return res;
 }
+
+std::vector<int> Graph::del(std::vector<int> &vec, int v)
+{
+    if (!vec.size()) return vec;
+    std::vector<int> res;
+    for (int i = 0; i < vec.size(); i++)
+        if (vec[i] != v) 
+            res.push_back(vec[i]);
+
+    return res;
+}
+
 
 #include "graph_main.hpp"
 #include "graph_dfs.hpp"
