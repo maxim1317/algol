@@ -13,6 +13,8 @@ int val = 0;
 class Graph
 {
 private:
+std::vector<int> pop(std::vector<int> &);
+
 // In /headers/graph_main.hpp:
     void GenIJ();
     void GenHl();
@@ -23,6 +25,9 @@ private:
 
 // In /headers/graph_bfs.hpp:
     std::vector<int> GetNeighbours(int);
+
+// In /headers/graph_belford.hpp:
+    std::vector<int> priority(std::vector<int> &);
 
 // In /headers/graph_dijkstra.hpp:
     int MinEdge(bool*);
@@ -74,7 +79,7 @@ public:
 // In /headers/colors.hpp:
 const char* conColor (int);
 
-std::vector<int> pop(std::vector<int> &vec)
+std::vector<int> Graph::pop(std::vector<int> &vec)
 {
     if (!vec.size()) return vec;
     std::vector<int> res;
@@ -87,8 +92,8 @@ std::vector<int> pop(std::vector<int> &vec)
 #include "graph_main.hpp"
 #include "graph_dfs.hpp"
 #include "graph_bfs.hpp"
-#include "graph_belford.hpp"
 #include "graph_dijkstra.hpp"
+#include "graph_belford.hpp"
 #include "graph_prints.hpp"
 
 

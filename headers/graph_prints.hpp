@@ -96,7 +96,10 @@ void Graph::Export(int option = 0)
         if (option == 1)
         {
             fprintf(out, "    %d--%d  [style=dotted, arrowhead=odot, arrowsize=1] ;\n", i, i+n+1);
-            fprintf(out, "    %d [shape=plaintext,label=\"%d\"]", i+n+1, distance[i]);
+            if (distance[i] != INT_MAX)
+                fprintf(out, "    %d [shape=plaintext,label=\"%d\"]", i+n+1, distance[i]);
+            else
+                fprintf(out, "    %d [shape=plaintext,label=\"INF\"]", i+n+1);
             fprintf(out, "    {rank=same; %d;%d}\n\n", i, i+n+1);
         }
 	}
