@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
   vector<int> vi = {0, 0, 2, 4};
   vector<int> vj = {1, 2, 3, 6};
   std::vector<int> vh;
-  mode = 1;
+  mode = 2;
   Graph a(7, vi, vj);
   printf("\n");
 
